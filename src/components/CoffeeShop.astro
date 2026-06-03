@@ -1,0 +1,140 @@
+<div class="bg-sky-200 rounded-xl p-4">
+  <h2 class="font-bold text-lg mb-3">Gestión de una cafetería</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <div class="mb-3">
+        <h3 class="font-semibold mb-1">Bebida</h3>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="bebida" value="te" data-precio="1.5" />
+          <span>Té</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="bebida" value="cafe" data-precio="2" checked />
+          <span>Café</span>
+        </label>
+      </div>
+
+      <div class="mb-3">
+        <h3 class="font-semibold mb-1">Complemento</h3>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="complemento" value="sin-leche" data-precio="0" checked />
+          <span>Sin leche</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="complemento" value="leche" data-precio="0.5" />
+          <span>Leche</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="complemento" value="sin-lactosa" data-precio="0.8" />
+          <span>Leche sin lactosa</span>
+        </label>
+      </div>
+
+      <div class="mb-3">
+        <h3 class="font-semibold mb-1">Extras</h3>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="extras" value="sin-extras" data-precio="0" checked />
+          <span>Sin Extras</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="extras" value="muffin" data-precio="1.5" />
+          <span>Muffin</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="extras" value="cookie" data-precio="1" />
+          <span>Cookie</span>
+        </label>
+      </div>
+
+      <div class="mb-3">
+        <h3 class="font-semibold mb-1">Vaso</h3>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="vaso" value="propio" data-descuento="5" />
+          <span>Propio - 5% descuento</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="vaso" value="plastico" data-recargo="5" />
+          <span>Plástico - 5% recargo</span>
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="vaso" value="sin" data-precio="0" checked />
+          <span>Sin ir</span>
+        </label>
+      </div>
+
+      <div class="mt-4">
+        <span class="font-semibold">Precio: </span>
+        <span id="precioTotal" class="font-bold text-lg">2.00 €</span>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-center">
+      <img
+        id="productoImagen"
+        src="https://media.istockphoto.com/id/1152767411/es/foto/taza-de-caf%C3%A9-latte-aislado-sobre-fondo-blanco-con-trazado-de-recorte.jpg?s=612x612&w=0&k=20&c=oYFbB3qkCV2wkXOb8OvdTso9UKlbcUSPdH-rDgOx3sU="
+        alt="Producto"
+        class="w-48 h-48 object-cover rounded-lg"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  const bebidas = document.querySelectorAll('input[name="bebida"]');
+  const complementos = document.querySelectorAll('input[name="complemento"]');
+  const extras = document.querySelectorAll('input[name="extras"]');
+  const vasos = document.querySelectorAll('input[name="vaso"]');
+  const precioDisplay = document.getElementById("precioTotal") as HTMLElement | null;
+  const imagen = document.getElementById("productoImagen") as HTMLImageElement | null;
+
+  const imagenesProductos: Record<string, string> = {
+    te: "https://media.istockphoto.com/id/1952316980/es/foto/imagen-de-beber-t%C3%A9-caliente-a-la-hora-del-t%C3%A9.jpg?s=612x612&w=0&k=20&c=W4ITlczHzx86t43bRj1VyjSZeWjjRdpIQAzgvbfU4O0=",
+    cafe: "https://media.istockphoto.com/id/1152767411/es/foto/taza-de-caf%C3%A9-latte-aislado-sobre-fondo-blanco-con-trazado-de-recorte.jpg?s=612x612&w=0&k=20&c=oYFbB3qkCV2wkXOb8OvdTso9UKlbcUSPdH-rDgOx3sU=",
+  };
+
+  function calcularPrecio() {
+    let precio = 0;
+
+    const bebidaSeleccionada = document.querySelector('input[name="bebida"]:checked') as HTMLInputElement | null;
+    const complementoSeleccionado = document.querySelector('input[name="complemento"]:checked') as HTMLInputElement | null;
+    const extraSeleccionado = document.querySelector('input[name="extras"]:checked') as HTMLInputElement | null;
+    const vasoSeleccionado = document.querySelector('input[name="vaso"]:checked') as HTMLInputElement | null;
+
+    if (bebidaSeleccionada) {
+      precio += parseFloat(bebidaSeleccionada.dataset.precio || '0');
+    }
+    if (complementoSeleccionado) {
+      precio += parseFloat(complementoSeleccionado.dataset.precio || '0');
+    }
+    if (extraSeleccionado) {
+      precio += parseFloat(extraSeleccionado.dataset.precio || '0');
+    }
+
+    if (vasoSeleccionado) {
+      if (vasoSeleccionado.dataset.descuento) {
+        const descuento = parseFloat(vasoSeleccionado.dataset.descuento);
+        precio = precio - (precio * descuento) / 100;
+      }
+      if (vasoSeleccionado.dataset.recargo) {
+        const recargo = parseFloat(vasoSeleccionado.dataset.recargo);
+        precio = precio + (precio * recargo) / 100;
+      }
+    }
+
+    if (precioDisplay) {
+      precioDisplay.textContent = precio.toFixed(2) + " €";
+    }
+
+    if (bebidaSeleccionada && imagen) {
+      const tipoBebida = bebidaSeleccionada.value;
+      if (imagenesProductos[tipoBebida]) {
+        imagen.src = imagenesProductos[tipoBebida];
+      }
+    }
+  }
+
+  const todosLosInputs = [...bebidas, ...complementos, ...extras, ...vasos];
+  todosLosInputs.forEach(function (input) {
+    input.addEventListener("change", calcularPrecio);
+  });
+</script>

@@ -1,0 +1,46 @@
+<div class="bg-sky-200 rounded-xl p-4">
+  <h2 class="font-bold text-lg mb-3">COMPARADOR DE TEXTOS</h2>
+  <div class="flex items-center gap-3">
+    <input
+      type="text"
+      id="textA"
+      placeholder="A"
+      class="flex-1 p-2 rounded-lg bg-gray-300 text-center"
+    />
+    <span class="text-xl">≠</span>
+    <input
+      type="text"
+      id="textB"
+      placeholder="B"
+      class="flex-1 p-2 rounded-lg bg-gray-300 text-center"
+    />
+  </div>
+  <p id="compareResult" class="mt-2 font-semibold"></p>
+</div>
+
+<script>
+  const textA = document.getElementById("textA");
+  const textB = document.getElementById("textB");
+  const result = document.getElementById("compareResult");
+
+  function compararTextos() {
+    const valorA = textA.value;
+    const valorB = textB.value;
+
+    if (valorA === "" && valorB === "") {
+      result.textContent = "";
+      return;
+    }
+
+    if (valorA === valorB) {
+      result.textContent = "Los textos son IGUALES";
+      result.style.color = "green";
+    } else {
+      result.textContent = "Los textos son DIFERENTES";
+      result.style.color = "red";
+    }
+  }
+
+  textA.addEventListener("input", compararTextos);
+  textB.addEventListener("input", compararTextos);
+</script>

@@ -1,0 +1,49 @@
+<div class="bg-sky-200 rounded-xl p-4">
+  <h2 class="font-bold text-lg mb-3">RAÍZ CUADRADA</h2>
+  <div class="flex items-center gap-2">
+    <input
+      type="number"
+      id="sqrtInput"
+      placeholder="Número"
+      class="flex-1 p-2 rounded-lg bg-gray-300"
+    />
+    <span class="text-xl">=</span>
+    <span id="sqrtResult" class="flex-1 p-2 rounded-lg bg-gray-300 text-center min-h-[42px] flex items-center justify-center"></span>
+  </div>
+  <p id="sqrtError" class="text-red-600 text-sm mt-1"></p>
+</div>
+
+<script>
+  const input = document.getElementById("sqrtInput");
+  const result = document.getElementById("sqrtResult");
+  const error = document.getElementById("sqrtError");
+
+  function calcularRaiz() {
+    const valor = input.value;
+    error.textContent = "";
+
+    if (valor === "") {
+      result.textContent = "";
+      return;
+    }
+
+    const numero = parseFloat(valor);
+
+    if (isNaN(numero)) {
+      error.textContent = "Introduce un número válido";
+      result.textContent = "";
+      return;
+    }
+
+    if (numero < 0) {
+      error.textContent = "No se puede calcular la raíz de un número negativo";
+      result.textContent = "";
+      return;
+    }
+
+    const raiz = Math.sqrt(numero);
+    result.textContent = raiz.toFixed(2);
+  }
+
+  input.addEventListener("input", calcularRaiz);
+</script>

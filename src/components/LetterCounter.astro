@@ -1,0 +1,27 @@
+<div class="bg-sky-200 rounded-xl p-4">
+  <h2 class="font-bold text-lg mb-3">CONTAR HASTA 30 LETRAS</h2>
+  <div class="flex items-center gap-2">
+    <input
+      type="text"
+      id="letterInput"
+      maxlength="30"
+      placeholder="Escribe aquí..."
+      class="flex-1 p-2 rounded-lg bg-gray-300"
+    />
+    <span id="letterCount" class="font-semibold">0</span>
+    <span>LETRAS</span>
+  </div>
+</div>
+
+<script>
+  const input = document.getElementById("letterInput");
+  const countDisplay = document.getElementById("letterCount");
+
+  function contarLetras() {
+    const texto = input.value;
+    const cantidad = texto.length;
+    countDisplay.textContent = cantidad;
+  }
+
+  input.addEventListener("input", contarLetras);
+</script>

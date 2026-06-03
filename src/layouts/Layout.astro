@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<title>APIs - Actividad 1 - Introducción a JavaScript</title>
+	</head>
+	<body class="min-h-screen flex flex-col bg-gray-100">
+		<header id="main-header" class="bg-blue-600 text-white p-4 text-center text-2xl font-bold">
+			APIs - Actividad 1 - Introducción a JavaScript
+		</header>
+		<main class="flex-1 p-6 max-w-5xl mx-auto w-full">
+			<slot />
+		</main>
+		<footer id="main-footer" class="bg-blue-600 text-white p-4 text-center">
+			Iván Huesca - DAM
+		</footer>
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>

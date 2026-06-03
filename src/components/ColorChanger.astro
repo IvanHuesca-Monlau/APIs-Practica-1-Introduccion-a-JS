@@ -1,0 +1,67 @@
+<div class="bg-sky-200 rounded-xl p-4">
+  <h2 class="font-bold text-lg mb-3">CAMBIO DE COLOR DEL HEADER</h2>
+  <div class="flex gap-4 mb-4">
+    <label class="flex items-center gap-1">
+      <input type="radio" name="headerColor" value="green" />
+      <span>Verde</span>
+    </label>
+    <label class="flex items-center gap-1">
+      <input type="radio" name="headerColor" value="blue" checked />
+      <span>Azul</span>
+    </label>
+    <label class="flex items-center gap-1">
+      <input type="radio" name="headerColor" value="red" />
+      <span>Rojo</span>
+    </label>
+  </div>
+
+  <h2 class="font-bold text-lg mb-3">CAMBIO DE COLOR DEL FOOTER</h2>
+  <div class="flex gap-4">
+    <label class="flex items-center gap-1">
+      <input type="radio" name="footerColor" value="green" />
+      <span>Verde</span>
+    </label>
+    <label class="flex items-center gap-1">
+      <input type="radio" name="footerColor" value="blue" checked />
+      <span>Azul</span>
+    </label>
+    <label class="flex items-center gap-1">
+      <input type="radio" name="footerColor" value="red" />
+      <span>Rojo</span>
+    </label>
+  </div>
+</div>
+
+<script>
+  const headerRadios = document.querySelectorAll('input[name="headerColor"]');
+  const footerRadios = document.querySelectorAll('input[name="footerColor"]');
+  const header = document.getElementById("main-header");
+  const footer = document.getElementById("main-footer");
+
+  const colores = {
+    green: "bg-green-600",
+    blue: "bg-blue-600",
+    red: "bg-red-600",
+  };
+
+  function cambiarColorHeader() {
+    headerRadios.forEach((radio) => {
+      radio.addEventListener("change", function () {
+        header.classList.remove("bg-green-600", "bg-blue-600", "bg-red-600");
+        header.classList.add(colores[this.value]);
+      });
+    });
+  }
+
+  function cambiarColorFooter() {
+    footerRadios.forEach((radio) => {
+      radio.addEventListener("change", function () {
+        footer.classList.remove("bg-green-600", "bg-blue-600", "bg-red-600");
+        footer.classList.add(colores[this.value]);
+      });
+    });
+  }
+
+  cambiarColorHeader();
+  cambiarColorFooter();
+</script>

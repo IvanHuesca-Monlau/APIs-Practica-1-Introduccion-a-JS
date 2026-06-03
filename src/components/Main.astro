@@ -1,0 +1,21 @@
+---
+import TextComparator from './TextComparator.astro';
+import LetterCounter from './LetterCounter.astro';
+import SquareRoot from './SquareRoot.astro';
+import ColorChanger from './ColorChanger.astro';
+import ImageResizer from './ImageResizer.astro';
+import CoffeeShop from './CoffeeShop.astro';
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+  <TextComparator />
+  <LetterCounter />
+  <ColorChanger />
+  <div class="flex flex-col gap-6">
+    <ImageResizer />
+    <SquareRoot />
+  </div>
+  <div class="md:col-span-2">
+    <CoffeeShop />
+  </div>
+</div>
